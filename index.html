@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body style="background: white;">
+    <h1>Hello World!</h1>
+    <p>
+        We are using node <script>document.write(process.versions.node)</script>,
+        Chrome <script>document.write(process.versions.chrome)</script>,
+        and Electron <script>document.write(process.versions.electron)</script>.
+    </p>
+	
+	<p>Choose location to save file</p>
+	<button onclick="chooselocation()">Choose location</button>
+	
+	<p>Let's try to write file</p>
+	<button onclick="writefile()">Write File</button>
+	
+	<p>And then let's read a file</p>
+	<button onclick="readfile()">Read File</button>
+	<script>
+	
+		function chooselocation(){
+		
+			const { dialog } = require('electron').remote;
+			console.log(dialog);
+			
+		}
+		
+		function writefile(){
+			fs = require('fs');
+			fs.writeFile('helloworld.txt', 'Hello World!', function (err) {
+			  if (err) return console.log(err);
+			  console.log('Hello World > helloworld.txt');
+			});
+		}
+		
+		function readfile(){
+			fs = require('fs');
+			fs.readFile('helloworld.txt', 'utf8', function (err,data) {
+			  if (err) {
+				return console.log(err);
+			  }
+			  console.log(data);
+			  alert(data);
+			});
+		}
+	</script>
+</body>
+</html>
